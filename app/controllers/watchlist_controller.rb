@@ -1,0 +1,3 @@
+class WatchlistController < ApplicationController
+
+end

@@ -1,0 +1,27 @@
+<%# <form action="/home" method="POST">
+    Enter ticker: <input type="text" name="ticker">
+    <input type="submit">
+</form> %>
+
+<h1> Welcome to your portfolio </h1>
+<!-- Load icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- The form -->
+<form class="example" action="/home" method="POST">
+  <input type="text" placeholder="Search.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+<% if !Stock.all.empty? %>
+<h3>Current list of stocks</h3>
+
+<% Stock.all.each do |stock| %>
+
+Name: <%= stock[:name] %><br>
+Price: <%= stock[:price] %><br>
+Ticker: <%= stock[:ticker] %><br>
+ <a href= "/edit"> Edit </a> <br>
+  <a href= "/edit"> Delete </a> <br><br>
+<br>
+<% end %>
+<% end %><br> <br>
