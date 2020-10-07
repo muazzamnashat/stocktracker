@@ -8,20 +8,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- The form -->
-<form class="example" action="/home" method="POST">
+<form class="example" action="/stocks" method="POST">
   <input type="text" placeholder="Search.." name="search">
   <button type="submit"><i class="fa fa-search"></i></button>
 </form>
-<% if !Stock.all.empty? %>
-<h3>Current list of stocks</h3>
-
-<% Stock.all.each do |stock| %>
-
-Name: <%= stock[:name] %><br>
-Price: <%= stock[:price] %><br>
-Ticker: <%= stock[:ticker] %><br>
- <a href= "/edit"> Edit </a> <br>
-  <a href= "/edit"> Delete </a> <br><br>
-<br>
+<br><br>
+<% if !@stocks.empty? %>
+<% @stocks.each do |stock|%>
+Name: <%= stock.name %> <br>
+Price: <%= stock.price %><br>
+Ticker: <%= stock.ticker %><br><br>
 <% end %>
-<% end %><br> <br>
+<% else %>
+<h3> You do not have any stock listed </h3>
+<% end %>
+
+<a href="/logout"> Log Out </a>

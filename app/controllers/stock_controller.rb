@@ -3,22 +3,31 @@ class StockController < ApplicationController
 ##
 
 get "/stocks" do
-  if logged_in?
-    @stocks= Stock.find_by(user_id: session[:user_id])
-  erb :"stock/index"
-  else  
-    redirect "/login"
+  list= Watchlist.where("user_id=#{session[:user_id]}").map do |watch|
+      watch.stock_id
   end
+  @stocks = list.map do |i| 
+    Stock.where("id=#{i}")
+  end.flatten
+  # binding.pry
+  erb :"stock/index"
 end
 
-post "/home" do
-  # binding.pry
-  if Stock.new(Stock.create_company(params[:search])).price != 0.0
- @stock= Stock.find_or_create_by(Stock.create_company(params[:search]))
- erb :"stock/index"
+post "/stocks" do
+  
+  
+ stock= Stock.find_or_create_by(Stock.create_company(params[:search].upcase))
+ 
+ if stock.price != 0.0 && stock.name !=nil 
+
+ w= Watchlist.find_or_create_by(stock_id:stock.id)
+ w.user= User.find(session[:user_id])
+  w.save
+
+redirect "/stocks"
   else 
-    flash[:errors]= "Not found"
-    redirect "/home"
+    stock.delete
+    redirect "/stocks"
   end
 end
 
