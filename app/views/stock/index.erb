@@ -25,7 +25,7 @@ Note: <% if stock.note %> <%= stock.note %>
 <br><br>
 <form action="/update" method="POST">
 <input type="hidden" id="hidden" name="_method" value="PATCH">
-<input type="submit" name="<%= stock.ticker %>" value="Update!"> 
+<input type="submit" name="<%= stock.ticker %>" value="Click here to update price!"> 
 </form>
 
 <form action="/stocks/<%=stock.id%>/edit" method="GET">
