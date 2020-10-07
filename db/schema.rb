@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2020_10_05_212404) do
 
   create_table "stocks", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
+    t.float "price"
     t.string "ticker"
     t.text "note"
     t.integer "user_id"

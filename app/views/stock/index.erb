@@ -23,8 +23,15 @@ Note: <% if stock.note %> <%= stock.note %>
  No note!
  <% end %>
 <br><br>
- <%# <% binding.pry %> 
-<a href="/stocks/<%=stock.id%>/edit"> Edit </a><br>
+<form action="/update" method="POST">
+<input type="hidden" id="hidden" name="_method" value="PATCH">
+<input type="submit" name="<%= stock.ticker %>" value="Update!"> 
+</form>
+
+<form action="/stocks/<%=stock.id%>/edit" method="GET">
+    <input type="submit" value="Edit Name and/or Note" >
+</form>
+
 <form method="POST" action="/stocks/<%= stock.id %>">
         <input type="hidden" id="hidden" name="_method" value="DELETE">
         <input type="submit" value="Delete">
