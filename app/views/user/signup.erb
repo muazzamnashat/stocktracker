@@ -1,3 +1,10 @@
+<% if @user && @user.save %>
+    <% @user.errors.full_messages.each do | error | %>
+        <p><%= error %></p>
+    <% end %>
+<% end %>
+
+
 <h1> Welcome to StockTracker! Sign up here </h1>
 <form action="/users" method="POST">
 

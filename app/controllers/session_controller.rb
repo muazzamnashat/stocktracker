@@ -11,6 +11,7 @@ class SessionController < ApplicationController
             session[:user_id] = user.id
             redirect "/stocks"
         else
+            flash[:notice] = "You've entered an invalid email or password. Please try again."
             redirect "/login"
         end
     end
