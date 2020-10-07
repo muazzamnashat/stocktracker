@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :sessions, true
     set :session_secret, "thisisthequickanddirtyway"
+    register Sinatra::Flash
   end
 
   get "/" do
@@ -26,6 +27,7 @@ class ApplicationController < Sinatra::Base
 
     def redirect_if_not_logged_in
       if !logged_in?
+        flash[:errors] = "You need to be logged in to see the page!"
         redirect "/login"
       end
     end
