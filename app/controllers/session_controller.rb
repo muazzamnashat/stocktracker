@@ -1,6 +1,7 @@
 class SessionController < ApplicationController
 
     get "/login" do
+        redirect_if_logged_in
         erb :"user/login"
     end
 
@@ -15,6 +16,8 @@ class SessionController < ApplicationController
     end
 
     get "/logout" do
+        redirect_if_not_logged_in
+        
         session.clear
         redirect "/login"
     end

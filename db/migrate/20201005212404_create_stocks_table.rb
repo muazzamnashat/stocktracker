@@ -4,7 +4,8 @@ class CreateStocksTable < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :price
       t.string :ticker
-    
+      t.text :note
+      t.integer :user_id
       t.timestamps
     end
   end

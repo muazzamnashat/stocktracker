@@ -1,1 +1,7 @@
-<h1> Edit your stock here</h1>
+<h1> You can edit the company name here</h1>
+<form action="/stocks/<%= @stock.id %>" method="POST" > 
+<input type="hidden" id="hidden" name="_method" value="PATCH">
+Name:<input type="text" value="<%= @stock.name %>" name="name"><br>
+Note:<input type="text" value="<%= @stock.note %>" name="note"><br>
+<input type="submit" value="Submit">
+</form>

@@ -2,8 +2,8 @@
     Enter ticker: <input type="text" name="ticker">
     <input type="submit">
 </form> %>
-
-<h1> Welcome to your portfolio </h1>
+ 
+<h1> Welcome <%= current_user.username %> to your portfolio </h1>
 <!-- Load icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -17,7 +17,18 @@
 <% @stocks.each do |stock|%>
 Name: <%= stock.name %> <br>
 Price: <%= stock.price %><br>
-Ticker: <%= stock.ticker %><br><br>
+Ticker: <%= stock.ticker %><br>
+Note: <% if stock.note %> <%= stock.note %>
+<% else %>
+ No note!
+ <% end %>
+<br><br>
+ <%# <% binding.pry %> 
+<a href="/stocks/<%=stock.id%>/edit"> Edit </a><br>
+<form method="POST" action="/stocks/<%= stock.id %>">
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete">
+    </form><br><br>
 <% end %>
 <% else %>
 <h3> You do not have any stock listed </h3>

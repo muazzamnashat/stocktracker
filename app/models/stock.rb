@@ -1,6 +1,5 @@
 class Stock < ActiveRecord::Base
-    has_many :watchlists
-    has_many :users, through: :watchlists 
+    belongs_to :user
 
     def self.create_company(tick)
         
@@ -19,5 +18,16 @@ class Stock < ActiveRecord::Base
         company
         
     end
+
+    def self.news
+        FinnhubRuby.configure do |config|
+            config.api_key['token'] = 'bttakdf48v6vtisvgdo0'
+            end
+            finnhub_client = FinnhubRuby::DefaultApi.new
+            
+            finnhub_client.general_news('general', {min_id: 0})
+    end
+
+    
     
 end
