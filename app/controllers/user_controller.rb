@@ -11,6 +11,7 @@ class UserController < ApplicationController
                 if @user && @user.save
                     
                 session[:user_id]= @user.id 
+                flash[:message] = "Signup successful!"
                 redirect "/stocks"
             else 
                 flash[:errors]=@user.errors.full_messages.join(" and ")

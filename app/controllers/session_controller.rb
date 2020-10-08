@@ -9,6 +9,7 @@ class SessionController < ApplicationController
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
+
             redirect "/stocks"
         else
             flash[:notice] = "You've entered an invalid email or password. Please try again."
@@ -20,6 +21,8 @@ class SessionController < ApplicationController
         redirect_if_not_logged_in
         
         session.clear
+        flash[:message] = "Successfully logged out!"
+
         redirect "/login"
     end
 end

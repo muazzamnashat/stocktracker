@@ -10,11 +10,13 @@ end
 
 post "/stocks" do
  
-  stock= Stock.create(Stock.create_company(params[:search].upcase))
- 
+  stock_info = Stock.create_company(params[:search].upcase)
+  stock_info[:user_id]=session[:user_id]
+  stock= Stock.find_or_create_by(stock_info)
+  # binding.pry
   if stock.price != 0.0 && stock.name !=nil 
-    stock.user = User.find(session[:user_id])
-    stock.save
+    # stock.user = User.find(session[:user_id])
+    # stock.save
     redirect "/stocks"
   else 
     stock.delete
@@ -30,6 +32,7 @@ get "/stocks/:id/edit" do
   if @stock[:user_id] == current_user.id
     erb :"stock/edit"
   else 
+    flash[:errors]= "You are not authorized to edit the information!"
     redirect "/stocks"
   end
 end
