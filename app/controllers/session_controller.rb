@@ -26,3 +26,5 @@ class SessionController < ApplicationController
         redirect "/login"
     end
 end
+
+#just testing

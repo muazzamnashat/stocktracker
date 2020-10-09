@@ -74,7 +74,6 @@ delete "/stocks/:id" do
 end
 
 get "/news" do
-  binding.pry
   redirect_if_not_logged_in
   erb :"stock/news"
 end

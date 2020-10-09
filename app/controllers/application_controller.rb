@@ -35,6 +35,12 @@ class ApplicationController < Sinatra::Base
     def redirect_if_logged_in
       if logged_in?
         redirect "/stocks"
+# just trying to see if repo is working
+# just trying to see if repo is working
+# just trying to see if repo is working
+# just trying to see if repo is working
+
+
       end
     end
   end
