@@ -9,11 +9,18 @@ get "/stocks" do
 end
 
 post "/stocks" do
- 
+#  binding.pry
+  already_in = Stock.where("user_id=#{session[:user_id]}").any? {|stock| stock.ticker == "#{params[:search].upcase}"}
+
+  if already_in
+    flash[:message] = "Already on the portfolio!"
+    redirect "/stocks"
+  end
   stock_info = Stock.create_company(params[:search].upcase)
   stock_info[:user_id]=session[:user_id]
   #could use params[:search].upcase instead of stock_info[:ticker] but then user can create non-valid stock instances
-  stock= Stock.find_or_create_by(ticker: stock_info[:ticker])
+  stock= Stock.create(stock_info)
+
   if stock.price != 0.0 && stock.name !=nil 
     redirect "/stocks"
   else 
