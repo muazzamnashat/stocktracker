@@ -6,10 +6,8 @@ class UserController < ApplicationController
     end
 
     post "/users" do
-      
             @user = User.new(params)
-                if @user && @user.save
-                    
+                if @user && @user.save   
                 session[:user_id]= @user.id 
                 flash[:message] = "Signup successful!"
                 redirect "/stocks"
@@ -17,6 +15,5 @@ class UserController < ApplicationController
                 flash[:errors]=@user.errors.full_messages.join(" and ")
                 redirect "/users/signup"
             end
-        
     end
 end

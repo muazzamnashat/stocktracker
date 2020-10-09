@@ -27,4 +27,3 @@ class SessionController < ApplicationController
     end
 end
 
-#just testing

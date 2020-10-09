@@ -1,6 +1,5 @@
 class StockController < ApplicationController
 
-
 get "/stocks" do
   redirect_if_not_logged_in
   @stocks = Stock.where("user_id=#{session[:user_id]}").map {|stock| stock}
@@ -9,7 +8,6 @@ get "/stocks" do
 end
 
 post "/stocks" do
-#  binding.pry
   already_in = Stock.where("user_id=#{session[:user_id]}").any? {|stock| stock.ticker == "#{params[:search].upcase}"}
 
   if already_in
@@ -48,14 +46,12 @@ patch "/update" do
   params.delete("_method")
   @stock= Stock.find_by(ticker: "#{params.keys.first}")
   updated_price=Stock.create_company("#{params.keys.first}")[:price]
-  # binding.pry
   @stock.update(price: updated_price)
   redirect "/stocks"
 
 end
 
 patch "/stocks/:id" do
-  # binding.pry
   @stock =Stock.find(params[:id])
   params.delete("_method")
   @stock.update(params)
