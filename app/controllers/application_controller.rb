@@ -12,6 +12,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    @stocks=Stock.all.map {|i|i}
     erb :welcome
   end
 

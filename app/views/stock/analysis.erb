@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stock Recommendation</title>
+</head>
+<body>
+<p>Analysts research public financial statements, listen in on conference calls and talk to managers and the customers of a company. Ultimately, through all this investigation into the company's performance, the analyst decides whether the stock is a "buy," sell," or hold. These pie charts show the distribution of recommendations on your stocks!"</p>
+    <div> <h3> Response Attributes: </h3>
+    <ul > 
+        <li>buy: Recommendations that fall into the Buy category </li>
+        <li>hold: Recommendations that fall into the Hold category </li>
+        <li>sell: Recommendations that fall into the Sell category </li>
+        <li>strongBuy: Recommendations that fall into the Strong Buy category </li>
+        <li>strongSell: Recommendations that fall into the Strong Sell category </li>
+
+    <ul><br>
+     </div>
+<% stocks = Stock.where("user_id=#{session[:user_id]}") %>
+ <% stocks.each do |s| %>
+ <div>
+ <u><b> <%= s.name %> </b></u>
+<%= pie_chart Stock.recommend(s.ticker) %><br>
+</div>
+<% end %>
+
+</body>
+</html>

@@ -12,16 +12,15 @@ post "/stocks" do
  
   stock_info = Stock.create_company(params[:search].upcase)
   stock_info[:user_id]=session[:user_id]
-  stock= Stock.find_or_create_by(stock_info)
-  # binding.pry
+  #could use params[:search].upcase instead of stock_info[:ticker] but then user can create non-valid stock instances
+  stock= Stock.find_or_create_by(ticker: stock_info[:ticker])
   if stock.price != 0.0 && stock.name !=nil 
-    # stock.user = User.find(session[:user_id])
-    # stock.save
     redirect "/stocks"
   else 
     stock.delete
     redirect "/stocks"
   end
+
 end
 
 get "/stocks/:id/edit" do
@@ -65,6 +64,16 @@ delete "/stocks/:id" do
   else 
     redirect "/stocks"
   end
+end
+
+get "/news" do
+  redirect_if_not_logged_in
+  erb :"stock/news"
+end
+
+get "/analysis" do
+  redirect_if_not_logged_in
+  erb :"stock/analysis"
 end
 
 end

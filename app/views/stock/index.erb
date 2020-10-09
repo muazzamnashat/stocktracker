@@ -1,56 +1,43 @@
-<%# <form action="/home" method="POST">
-    Enter ticker: <input type="text" name="ticker">
-    <input type="submit">
-</form> %>
- 
-<div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
-</div>
-
-
-
-
 <h2> Welcome <%= current_user.username %> to your portfolio </h2>
-<!-- Load icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- The form -->
-<form class="example" action="/stocks" method="POST">
-  <input type="text" placeholder="Search.." name="search">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form>
-<br><br>
+<br>
+<div >
+   <!-- Load icon library -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <h3> Search stocks </h3>
+   <!-- The form -->
+   <form action="/stocks" method="POST">
+      <input type="text" placeholder="Search by ticker i.e. AAT" name="search" class="search">
+      <button type="submit" class="button"><i class="fa fa-search"></i></button>
+   </form>
+</div>
+<br>
 <% if !@stocks.empty? %>
 <% @stocks.each do |stock|%>
-<p style="color:yellow;">
-Name: <%= stock.name %> <br>
-Price: <%= stock.price %><br>
-Ticker: <%= stock.ticker %><br>
-Note: <% if stock.note %> <%= stock.note %>
-<% else %>
- No note!
- </p>
- <% end %>
-<br><br>
+<p style="color:#fcfcfc;">
+   Name: <%= stock.name %> <br>
+   Price: <%= stock.price %> $<br>
+   Ticker: <%= stock.ticker %><br>
+   Note: <% if stock.note %> <%= stock.note %>
+   <% else %>
+   No note!
+</p>
+<% end %>
+
 <form action="/update" method="POST">
-<input type="hidden" id="hidden" name="_method" value="PATCH">
-<input type="submit" name="<%= stock.ticker %>" value="Click here to update price!"> 
+   <input type="hidden" id="hidden" name="_method" value="PATCH">
+   <input type="submit" name="<%= stock.ticker %>" value="Click here to update price!"> 
 </form>
-
 <form action="/stocks/<%=stock.id%>/edit" method="GET">
-    <input type="submit" value="Edit Name and/or Note" >
+   <input type="submit" value="Edit Name and/or Note" >
 </form>
-
 <form method="POST" action="/stocks/<%= stock.id %>">
-        <input type="hidden" id="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete">
-    </form><br><br>
+   <input type="hidden" id="hidden" name="_method" value="DELETE">
+   <input type="submit" value="Delete">
+</form>
+<br>
 <% end %>
 <% else %>
-<h3> You do not have any stock listed </h3>
+<h3 style="color:red;"> You do not have any stock listed </h3>
 <% end %>
-
 <a href="/logout"> Log Out </a>

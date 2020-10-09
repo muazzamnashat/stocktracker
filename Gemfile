@@ -13,6 +13,8 @@ gem 'bcrypt'
 gem 'tux'
 gem 'finnhub_ruby'
 gem 'sinatra-flash'
+gem 'chartkick'
+gem 'groupdate'
 
 group :test do
   gem 'rspec'

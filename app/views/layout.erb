@@ -12,8 +12,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
+
+  <script src="https://www.google.com/jsapi"></script>
+    <script src="chartkick.js"></script>
+
   </head>
   <body>
+
+
+<div class="topnav">
+<%# class="active" %>
+   <a href="/stocks">Home</a>
+   <a href="/news">News</a>
+   <a href="/analysis">Recommendation Trends</a>
+   <a href="#about">About</a>
+</div>
+
     <div class="wrapper">
       <% flash.keys.each do | type|  %>
         <div>
