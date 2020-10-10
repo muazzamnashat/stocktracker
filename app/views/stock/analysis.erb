@@ -21,7 +21,7 @@
       <% stocks = Stock.where("user_id=#{session[:user_id]}") %>
       <% stocks.each do |s| %>
       <div>
-         <u><b> <%= s.name %> </b></u>
+         <u><b> <%= s.name %> </b></u><br><br>
          <%= pie_chart Stock.recommend(s.ticker) %><br>
       </div>
       <% end %>
