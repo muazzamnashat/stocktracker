@@ -1,3 +1,2 @@
 # Stock Tracker
-
-
+![Feature image]
