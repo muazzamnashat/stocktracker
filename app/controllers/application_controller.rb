@@ -1,10 +1,9 @@
-require './config/environment'
+require "./config/environment"
 
 class ApplicationController < Sinatra::Base
-
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
+    set :public_folder, "public"
+    set :views, "app/views"
     enable :sessions
     set :sessions, true
     set :session_secret, "thisisthequickanddirtyway"
@@ -12,7 +11,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    @stocks=Stock.all.map {|i|i}
+    @stocks = Stock.all.map { |i| i }
     erb :welcome
   end
 
@@ -31,7 +30,7 @@ class ApplicationController < Sinatra::Base
         redirect "/login"
       end
     end
-    
+
     def redirect_if_logged_in
       if logged_in?
         redirect "/stocks"
