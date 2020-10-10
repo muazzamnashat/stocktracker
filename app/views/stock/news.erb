@@ -1,11 +1,14 @@
-<h1> Latest stock news </h1>
+<h1 class="news-heading"> Latest stock news </h1>
 
 
 <% Stock.news.each do |stock| %>
  <ul>
  <div class="news-list"> 
-<strong> <li> Headline : <%= stock.headline %> </li> </strong>
+<strong> <li> <%= stock.headline %> </li> </strong>
+
+<p> Source: <%= stock.source %></p>
  <li> <a href=<%= stock.url %> target="_blank"> Read here!  </a> </li>
  </div>
 <% end %>
+
 

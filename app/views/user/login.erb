@@ -1,9 +1,22 @@
-<h1>Login here!</h1>
-<div >
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h1 {
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+</style>
+</head>
+
+<h1 class="login-heading">Login here!</h1>
+<div class="container">
 <form method="POST"  action="/login">
     Email: <input type="text" name="email"><br />
     Password: <input type="password" name="password"><br /><br>
-    <input type="submit" value="Login!">
-</form><br> <br>
+<p class="login-button"><input type="submit" value="Login!"></p> </form><br> <br>
 </div>
-<a href="/signup"> Sign Up </a>
+<a href="/signup" class="login-foot"> Sign Up </a>
+
+</body>
+</html>

@@ -174,8 +174,56 @@ a:active {
   width: 300px; 
   } 
 
-.news-list {
-padding-top: 10px;
-padding-bottom: 10px;
+
+
+/* Login page */
+.container {
+  padding-top: 16px;
+  padding-left: 43%;
+  padding-right: 45%;
 }
 
+.login-heading {
+  padding-left: 40%;
+}
+
+.login-foot {
+  padding-left: 47.5%;
+  padding-right: 40%;
+}
+
+.signup-heading {
+  padding-left: 20%;
+}
+
+/* Signup page */
+.signup-foot {
+  padding-left: 42%;
+  
+}
+
+.signup-button {
+  padding-left: 48%;
+}
+
+.login-button {
+  padding-left: 43%;
+}
+
+/* Index Page */
+
+.index-heading{
+  padding-left: 15%;
+}
+
+/* News Styling */
+
+.news-list {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  }
+
+.news-heading {
+  padding-left: 32%;
+  padding-bottom: 10px;
+}

@@ -1,4 +1,15 @@
-<h2> Welcome <%= current_user.username %> to your portfolio </h2>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h2 {
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+</style>
+</head>
+
+<h2 class="index-heading"> Welcome <%= current_user.username %> to your portfolio </h2>
 
 <br>
 <div >
@@ -41,3 +52,6 @@
 <h3 style="color:red;"> You do not have any stock listed </h3>
 <% end %>
 <a href="/logout"> Log Out </a>
+
+</body>
+</html>
