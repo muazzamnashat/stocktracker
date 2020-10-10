@@ -1,57 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-h2 {
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
-}
-</style>
-</head>
-
-<h2 class="index-heading"> Welcome <%= current_user.username %> to your portfolio </h2>
-
-<br>
-<div >
-   <!-- Load icon library -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <h3> Search stocks </h3>
-   <!-- The form -->
-   <form action="/stocks" method="POST">
-      <input type="text" placeholder="Search by ticker i.e. AAT" name="search" class="search">
-      <button type="submit" class="button"><i class="fa fa-search"></i></button>
+   <head>
+      <style>
+         h2 {
+         color: white;
+         text-shadow: 2px 2px 4px #000000;
+         }
+      </style>
+   </head>
+   <h2 class="index-heading"> Welcome <%= current_user.username %> to your portfolio </h2>
+   <br>
+   <div >
+      <!-- Load icon library -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <h3> Search stocks </h3>
+      <!-- The form -->
+      <form action="/stocks" method="POST">
+         <input type="text" placeholder="Search by ticker i.e. AAT" name="search" class="search">
+         <button type="submit" class="button"><i class="fa fa-search"></i></button>
+      </form>
+   </div>
+   <br>
+   <% if !@stocks.empty? %>
+   <% @stocks.each do |stock|%>
+   <p style="color:#fcfcfc;">
+      Name: <%= stock.name %> <br>
+      Price: <%= stock.price %> $<br>
+      Ticker: <%= stock.ticker %><br>
+      Note: <% if stock.note %> <%= stock.note %>
+      <% else %>
+      No note!
+   </p>
+   <% end %>
+   <form action="/update" method="POST">
+      <input type="hidden" id="hidden" name="_method" value="PATCH">
+      <input type="submit" name="<%= stock.ticker %>" value="Click here to update price!"> 
    </form>
-</div>
-<br>
-<% if !@stocks.empty? %>
-<% @stocks.each do |stock|%>
-<p style="color:#fcfcfc;">
-   Name: <%= stock.name %> <br>
-   Price: <%= stock.price %> $<br>
-   Ticker: <%= stock.ticker %><br>
-   Note: <% if stock.note %> <%= stock.note %>
+   <form action="/stocks/<%=stock.id%>/edit" method="GET">
+      <input type="submit" value="Edit Name and/or Note" >
+   </form>
+   <form method="POST" action="/stocks/<%= stock.id %>">
+      <input type="hidden" id="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete">
+   </form>
+   <br>
+   <% end %>
    <% else %>
-   No note!
-</p>
-<% end %>
-
-<form action="/update" method="POST">
-   <input type="hidden" id="hidden" name="_method" value="PATCH">
-   <input type="submit" name="<%= stock.ticker %>" value="Click here to update price!"> 
-</form>
-<form action="/stocks/<%=stock.id%>/edit" method="GET">
-   <input type="submit" value="Edit Name and/or Note" >
-</form>
-<form method="POST" action="/stocks/<%= stock.id %>">
-   <input type="hidden" id="hidden" name="_method" value="DELETE">
-   <input type="submit" value="Delete">
-</form>
-<br>
-<% end %>
-<% else %>
-<h3 style="color:red;"> You do not have any stock listed </h3>
-<% end %>
-<a href="/logout"> Log Out </a>
-
-</body>
+   <h3 style="color:red;"> You do not have any stock listed </h3>
+   <% end %>
+   <a href="/logout"> Log Out </a>
+   </body>
 </html>
