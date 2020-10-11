@@ -230,3 +230,10 @@ a:active {
   padding-left: 32%;
   padding-bottom: 10px;
 }
+
+/* Edit page styling */
+
+.edit {
+  padding-left: 45%;
+  padding-right: 40%;
+}
