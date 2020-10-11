@@ -2,6 +2,8 @@
 
 *Stock Tracker* is a web app that let users add stocks to their watchlists. Users can follow stock news and see recommendations on the stocks they are following from stock analysts. 
 
+[see it live here!](https://stock-track-web-app.herokuapp.com/)
+
 ## Technologies used
 
 * Ruby (Sinatra framework)
