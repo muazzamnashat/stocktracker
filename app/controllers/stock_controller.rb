@@ -39,7 +39,7 @@ class StockController < ApplicationController
 
   patch "/update" do
     params.delete("_method")
-    @stock = Stock.find_by(ticker: "#{params.keys.first}")
+    @stock = Stock.find_by(ticker: "#{params.keys.first}",user_id: session[:user_id])
     updated_price = Stock.create_company("#{params.keys.first}")[:price]
     @stock.update(price: updated_price)
     redirect "/stocks"
