@@ -1,12 +1,15 @@
 class Stock < ActiveRecord::Base
   belongs_to :user
 
-  def self.create_company(ticker)
+  def self.finnhub_client
     FinnhubRuby.configure do |config|
       config.api_key["token"] = "bttakdf48v6vtisvgdo0"
     end
     finnhub_client = FinnhubRuby::DefaultApi.new
+    finnhub_client
+  end
 
+  def self.create_company(ticker)
     company = {}
     company[:name] = finnhub_client.company_profile2({ symbol: ticker }).name
     company[:price] = finnhub_client.quote(ticker).c
@@ -15,18 +18,10 @@ class Stock < ActiveRecord::Base
   end
 
   def self.news
-    FinnhubRuby.configure do |config|
-      config.api_key["token"] = "bttakdf48v6vtisvgdo0"
-    end
-    finnhub_client = FinnhubRuby::DefaultApi.new
     finnhub_client.general_news("general", { min_id: 0 })
   end
 
   def self.recommend(ticker)
-    FinnhubRuby.configure do |config|
-      config.api_key["token"] = "bttakdf48v6vtisvgdo0"
-    end
-    finnhub_client = FinnhubRuby::DefaultApi.new
     trends = finnhub_client.recommendation_trends(ticker)
     recommendation = {}
     trends.each do |t|
