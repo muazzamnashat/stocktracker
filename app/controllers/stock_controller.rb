@@ -20,6 +20,7 @@ class StockController < ApplicationController
       redirect "/stocks"
     else
       stock.delete
+      flash[:message] = "Invalid ticker!"
       redirect "/stocks"
     end
   end
