@@ -1,13 +1,12 @@
 class StockController < ApplicationController
   get "/stocks" do
     redirect_if_not_logged_in
-    @stocks = Stock.where("user_id=#{session[:user_id]}").map { |stock| stock }
+    @stocks = current_user.stocks
     erb :"stock/index"
   end
 
   post "/stocks" do
-    already_in = Stock.where("user_id=#{session[:user_id]}").any? { |stock| stock.ticker == "#{params[:search].upcase}" }
-
+    already_in = current_user.stocks.any? { |stock| stock.ticker == "#{params[:search].upcase}" }
     if already_in
       flash[:message] = "Already on the portfolio!"
       redirect "/stocks"
