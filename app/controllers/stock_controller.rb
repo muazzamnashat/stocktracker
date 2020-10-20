@@ -1,7 +1,7 @@
 class StockController < ApplicationController
   get "/stocks" do
     redirect_if_not_logged_in
-    @stocks = current_user.stocks
+    @stocks = current_user.sorted
     erb :"stock/index"
   end
 
